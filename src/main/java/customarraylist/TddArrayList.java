@@ -5,7 +5,7 @@ import java.util.AbstractList;
 @SuppressWarnings("unchecked")
 public class TddArrayList<E> extends AbstractList<E> {
 
-    public static final int DEFAULT_CAPACITY = 10;
+    private static final int DEFAULT_CAPACITY = 10;
     private final E[] backingArray;
     private int size=0;
 
@@ -36,10 +36,7 @@ public class TddArrayList<E> extends AbstractList<E> {
 
     @Override
     public E remove(int index) {
-        if (index<0 || index>=size){
-            throw new IndexOutOfBoundsException
-                    ("index " + index + "out of bounds");
-        }
+        throwIfIndexIsOutOfBounds(index);
         E removedElement = backingArray[index];
 
         for(int i=index; i<size-1; i++){
@@ -51,8 +48,14 @@ public class TddArrayList<E> extends AbstractList<E> {
         size--;
         return removedElement;
     }
-
     int currentCapacity(){
         return backingArray.length;
+    }
+
+    private void throwIfIndexIsOutOfBounds(int index) {
+        if (index <0 || index >=size){
+            throw new IndexOutOfBoundsException
+                    ("index " + index + "out of bounds");
+        }
     }
 }
