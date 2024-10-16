@@ -5,11 +5,12 @@ import java.util.AbstractList;
 @SuppressWarnings("unchecked")
 public class TddArrayList<E> extends AbstractList<E> {
 
+    public static final int DEFAULT_CAPACITY = 10;
     private final E[] backingArray;
     private int size=0;
 
     public TddArrayList() {
-        this.backingArray=(E[])new Object[10];
+        this.backingArray=(E[])new Object[DEFAULT_CAPACITY];
         this.size = 0;
     }
 
