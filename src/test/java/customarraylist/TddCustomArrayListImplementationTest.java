@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static java.util.stream.IntStream.range;
 import static org.apache.commons.lang3.RandomStringUtils.random;
@@ -155,6 +156,24 @@ class TddCustomArrayListImplementationTest {
         assertThrows(IndexOutOfBoundsException.class,
                 ()-> list.set(1, random(10)));
 
+    }
+
+    @Test
+    void canConstructTddArrayListByPassingInExistingList(){
+        List<String> originaList =
+                List.of(random(10), random(10), random(10));
+        List<String> tddList = new TddArrayList<>(originaList);
+
+        assertThat(tddList).containsExactlyElementsOf(originaList);
+    }
+
+    @Test
+    void canConstructTddArrayListByPassingInExistingSet(){
+        Set<String> originaSet =
+                Set.of(random(10), random(10), random(10));
+        List<String> tddList = new TddArrayList<>(originaSet);
+
+        assertThat(tddList).containsExactlyElementsOf(originaSet);
     }
 
 

@@ -1,6 +1,7 @@
 package customarraylist;
 
 import java.util.AbstractList;
+import java.util.Collection;
 
 @SuppressWarnings("unchecked")
 public class TddArrayList<E> extends AbstractList<E> {
@@ -12,6 +13,17 @@ public class TddArrayList<E> extends AbstractList<E> {
     public TddArrayList() {
         this.backingArray=(E[])new Object[DEFAULT_CAPACITY];
         this.size = 0;
+    }
+
+    public TddArrayList(Collection<E> elements) {
+        this.backingArray=(E[])new Object[elements.size()];
+        this.size = elements.size();
+
+        int index=0;
+        for(E element : elements){
+            backingArray[index] =element;
+            index++;
+        }
     }
 
     @Override
