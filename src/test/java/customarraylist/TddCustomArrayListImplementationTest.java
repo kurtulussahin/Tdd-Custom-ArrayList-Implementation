@@ -112,5 +112,50 @@ class TddCustomArrayListImplementationTest {
 
     }
 
+    @Test
+    void callingAddWithAnOutOfBoundIndexThrowException(){
+        List<String> list = new TddArrayList<>();
+
+        assertThrows(IndexOutOfBoundsException.class, ()-> list.add(-1, random(10)));
+        assertThrows(IndexOutOfBoundsException.class, ()-> list.add(1, random(10)));
+
+    }
+
+
+    @Test
+    void canCallSetToReplaceElementInList(){
+        List<Integer> list = new TddArrayList<>();
+        list.add(6);
+        list.add(7);
+        list.add(8);
+
+        list.set(1,10);
+        assertThat(list).containsExactly(6,10,8);
+
+    }
+
+    @Test
+    void setReturnsTheUnsetValue(){
+        List<Integer> list = new TddArrayList<>();
+        list.add(6);
+        list.add(7);
+        list.add(8);
+
+
+        assertThat(list.set(1,10)).isEqualTo(7);
+
+    }
+
+    @Test
+    void callingSetWithAnOutOfBoundIndexThrowException(){
+        List<String> list = new TddArrayList<>();
+
+        assertThrows(IndexOutOfBoundsException.class,
+                ()-> list.set(-1, random(10)));
+        assertThrows(IndexOutOfBoundsException.class,
+                ()-> list.set(1, random(10)));
+
+    }
+
 
 }
