@@ -35,7 +35,10 @@ public class TddArrayList<E> extends AbstractList<E> {
 
     @Override
     public E remove(int index) {
-
+        if (index<0 || index>=size){
+            throw new IndexOutOfBoundsException
+                    ("index " + index + "out of bounds");
+        }
         E removedElement = backingArray[index];
 
         for(int i=index; i<size-1; i++){

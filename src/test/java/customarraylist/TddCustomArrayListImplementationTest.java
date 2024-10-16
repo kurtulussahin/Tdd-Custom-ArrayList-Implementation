@@ -1,5 +1,6 @@
 package customarraylist;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import static java.util.stream.IntStream.range;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class TddCustomArrayListImplementationTest {
 
@@ -98,6 +100,15 @@ class TddCustomArrayListImplementationTest {
         list.remove(0);
 
         assertThat(list).hasSize(list.currentCapacity()-1);
+
+    }
+
+    @Test
+    void callingRemoveWithAnOutOfBoundIndexThrowException(){
+        List<String> list = new TddArrayList<>();
+        list.add(random(10));
+        assertThrows(IndexOutOfBoundsException.class, ()-> list.remove(-1));
+        assertThrows(IndexOutOfBoundsException.class, ()-> list.remove(1));
 
     }
 
