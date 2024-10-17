@@ -8,6 +8,7 @@ import java.util.Set;
 
 import static java.util.stream.IntStream.range;
 import static org.apache.commons.lang3.RandomStringUtils.random;
+import static org.apache.commons.lang3.RandomUtils.nextInt;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -187,6 +188,20 @@ class TddCustomArrayListImplementationTest {
 
         assertThat(list).hasSize(stratingCapacity+1);
         assertThat(list.currentCapacity()).isGreaterThan(stratingCapacity);
+    }
+
+    @Test
+    void stressTest(){
+        TddArrayList<String> list = new TddArrayList<>();
+
+        int totalAddedElements =list.currentCapacity()*100;
+        int totalRemovedElements =list.currentCapacity()*10;
+
+        range(0, totalAddedElements).forEach(__ -> list.add(nextInt(0,list.size()), random(10)));
+        range(0, totalRemovedElements).forEach(__ -> list.remove(nextInt(0,list.size())));
+
+        assertThat(list).hasSize(totalAddedElements-totalRemovedElements);
+        assertThat(list.currentCapacity()).isGreaterThanOrEqualTo(totalAddedElements);
     }
 
 
