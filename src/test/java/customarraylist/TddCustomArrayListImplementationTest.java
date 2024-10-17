@@ -149,6 +149,17 @@ class TddCustomArrayListImplementationTest {
     }
 
     @Test
+    void callingGetWithAnOutOfBoundIndexThrowException(){
+        List<String> list = new TddArrayList<>();
+
+        assertThrows(IndexOutOfBoundsException.class,
+                ()-> list.get(-1));
+        assertThrows(IndexOutOfBoundsException.class,
+                ()-> list.get(1));
+
+    }
+
+    @Test
     void callingSetWithAnOutOfBoundIndexThrowException(){
         List<String> list = new TddArrayList<>();
 

@@ -29,15 +29,23 @@ public class TddArrayList<E> extends AbstractList<E> {
 
     @Override
     public E get(int index) {
+        throwIfIndexIsOutOfBounds(index,size-1);
+
         return backingArray[index];
+    }
+
+    @Override
+    public E set(int index, E element) {
+        throwIfIndexIsOutOfBounds(index,size-1);
+        E unsetElement = backingArray[index];
+        backingArray[index]=element;
+        return unsetElement;
     }
 
     @Override
     public int size() {
         return size;
     }
-
-
 
     @Override
     public void add(int index, E element) {
@@ -64,14 +72,6 @@ public class TddArrayList<E> extends AbstractList<E> {
         backingArray[size-1]=null;
         size--;
         return removedElement;
-    }
-
-    @Override
-    public E set(int index, E element) {
-        throwIfIndexIsOutOfBounds(index,size-1);
-        E unsetElement = backingArray[index];
-        backingArray[index]=element;
-        return unsetElement;
     }
 
     int currentCapacity(){
