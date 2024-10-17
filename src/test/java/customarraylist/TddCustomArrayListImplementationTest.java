@@ -73,7 +73,6 @@ class TddCustomArrayListImplementationTest {
         list.add(random(10));
         list.add(element);
 
-
         list.remove(0);
         assertThat(list).containsExactly(element);
     }
