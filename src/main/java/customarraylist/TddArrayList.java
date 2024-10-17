@@ -7,7 +7,8 @@ import java.util.Collection;
 public class TddArrayList<E> extends AbstractList<E> {
 
     private static final int DEFAULT_CAPACITY = 10;
-    private final E[] backingArray;
+    private static final int GROWTH_FACTOR = 2;
+    private E[] backingArray;
     private int size=0;
 
     public TddArrayList() {
@@ -41,6 +42,8 @@ public class TddArrayList<E> extends AbstractList<E> {
     @Override
     public void add(int index, E element) {
         throwIfIndexIsOutOfBounds(index, size);
+        ensureCapacity(size+1);
+
         for(int i=size-1; i>=index; i--){
             backingArray[i+1]=backingArray[i];
         }
@@ -80,5 +83,16 @@ public class TddArrayList<E> extends AbstractList<E> {
             throw new IndexOutOfBoundsException
                     ("index " + index + "out of bounds");
         }
+    }
+
+    private void ensureCapacity(int desiredCapacity) {
+        if (desiredCapacity <= currentCapacity()) {
+            return;
+        }
+        E[] newBackingArray = (E[]) new Object[currentCapacity()* GROWTH_FACTOR];
+        for(int i=0; i<size; i++){
+            newBackingArray[i]=backingArray[i];
+        }
+        backingArray=newBackingArray;
     }
 }

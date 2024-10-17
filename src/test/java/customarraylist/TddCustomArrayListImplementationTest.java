@@ -176,5 +176,18 @@ class TddCustomArrayListImplementationTest {
         assertThat(tddList).containsExactlyElementsOf(originaSet);
     }
 
+    @Test
+    void listGrowsInCapacityWhenAddingMoreElementsThanTheCurrentCapacity(){
+        TddArrayList<String> list = new TddArrayList<>();
+
+        int stratingCapacity =list.currentCapacity();
+        range(0, list.currentCapacity()).forEach(__ -> list.add(random(10)));
+
+        list.add(list.size()/2, random(10));
+
+        assertThat(list).hasSize(stratingCapacity+1);
+        assertThat(list.currentCapacity()).isGreaterThan(stratingCapacity);
+    }
+
 
 }
